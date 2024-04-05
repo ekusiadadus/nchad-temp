@@ -29,3 +29,9 @@ lspconfig.clangd.setup {
   end,
   capabilities = capabilities,
 }
+
+lspconfig.rust_analyzer.setup {
+  on_attach = on_attach,
+  on_init = on_init,
+  capabilities = capabilities,
+}
