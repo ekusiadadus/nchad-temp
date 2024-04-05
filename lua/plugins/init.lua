@@ -41,5 +41,39 @@ return {
     opts = function()
       return require "configs.null-ls"
     end,
+  },
+  {
+    "mfussenegger/nvim-dap",
+  },
+  {
+    "jay-babu/mason-nvim-dap.nvim",
+    dependencies = {
+      "williamboman/mason.nvim",
+      "mfussenegger/nvim-dap",
+    },
+    opts = {
+      handlers = {
+
+      }
+    }
+  },
+  {
+    "rcarriga/nvim-dap-ui",
+    event = "VeryLazy",
+    dependencies = "mfussenegger/nvim-dap",
+    configs = function()
+      local dap = require('dap')
+      local dapui = require('dapui')
+      dapui.setup()
+      dap.listeners.after.event_initialized['dapui_config'] = function ()
+        dapui.setup()
+      end
+      dap.listeners.before.event_terminated["dapui_config"] = function ()
+        dapui.close()
+      end
+      dap.listeners.before.event_exited['dapui_config'] = function()
+        dapui.close()
+      end
+    end
   }
 }
